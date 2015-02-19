@@ -19,5 +19,13 @@
 #
 ###############################################################################
 
-from . import wizard
-from . import models
+from openerp import models, api, fields, exceptions, _
+
+
+class PortalManager(models.Model):
+    _inherit = 'res.groups'
+
+    is_portalmanager = fields.Boolean(
+        string='Portal Manager',
+        help="If checked, this group is usable as a portal manager."
+    )

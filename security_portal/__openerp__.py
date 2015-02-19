@@ -29,15 +29,21 @@
     'depends': [
         'base',
         'portal',
+        'portal_project',
+        'portal_claim',
+        'portal_project_issue',
         'mail',
     ],
     'data': [
         'security/portal_security.xml',
+        'views/portal_view.xml',
+        'wizard/portal_wizard_view.xml',
+        'data/portal_data.xml',
     ],
     'demo': [
     ],
     'test': [
     ],
     'installable': True,
-    'application': True,
+    'application': False,
 }

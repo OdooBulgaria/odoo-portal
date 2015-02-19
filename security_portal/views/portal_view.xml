@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="portal_after_sales" model="ir.ui.menu">
+            <field name="name">After Sale Services</field>
+            <field name="groups_id"
+                   eval="[(6,0,[ref('base.group_portal_manager')])]"/>
+        </record>
+
+        <record id="portal_services_projects" model="ir.ui.menu">
+            <field name="name">Projects</field>
+            <field name="groups_id"
+                   eval="[(6,0,[ref('base.group_portal')])]"/>
+        </record>
+
+        <record id="portal.portal_orders" model="ir.ui.menu">
+            <field name="name">Projects</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_portal_manager')])]"/>
+        </record>
+
+
+    </data>
+</openerp>

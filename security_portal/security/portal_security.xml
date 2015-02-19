@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data noupdate="0">
-        <record id="group_portal_manager" model="res.groups">
+        <record id="base.group_portal_manager" model="res.groups">
             <field name="name">Portal Manager</field>
             <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
         </record>

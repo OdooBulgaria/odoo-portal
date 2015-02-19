@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- wizard form view -->
+        <record id="wizard_portal_manager_form_view" model="ir.ui.view">
+            <field name="name">Portal Access Management</field>
+            <field name="model">portal.wizard</field>
+            <field name="inherit_id" ref="portal.wizard_view"/>
+            <field name="arch" type="xml">
+                <field name="portal_id" position="before">
+                    <field name="manager_id"/>
+                </field>
+            </field>
+        </record>
+        <!-- wizard user list view -->
+        <record id="wizard_portal_manager_tree_view" model="ir.ui.view">
+            <field name="name">Portal Users or Manager</field>
+            <field name="model">portal.wizard.user</field>
+            <field name="inherit_id" ref="portal.wizard_user_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="in_portal" position="before">
+                    <field name="in_portalmanager"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
