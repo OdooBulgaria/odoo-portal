@@ -1,4 +1,4 @@
-# Modulos que modifican el comportamiento del Portal Odoo 8
+# Modulos Portal Odoo 8
 
 
 ## security_portal

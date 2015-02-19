@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="portal.wizard_view"/>
             <field name="arch" type="xml">
                 <field name="portal_id" position="before">
-                    <field name="manager_id"/>
+                    <field name="manager_id" invisible="1"/>
                 </field>
             </field>
         </record>

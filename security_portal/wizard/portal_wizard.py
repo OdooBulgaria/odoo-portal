@@ -73,11 +73,15 @@ class Wizard(models.TransientModel):
                                                          portal_user_ids,
                                                          context)
         # Aqui el codigo no estandar agregado para nosotros
+        res_users = self.pool.get('res.users')
         for wizard_user in wizard.user_ids:
             if wizard_user.in_portalmanager:
-                user = self.pool.get('portal.wizard.user')._retrieve_user(
-                    SUPERUSER_ID, wizard_user, context)
-                user.write({'groups_id': [(4, wizard.manager_id.id)]})
+                domain = [('partner_id', '=', wizard_user.partner_id.id),
+                          ('email', '=', wizard_user.email)]
+                res_user_id = res_users.search(cr, uid, domain, context=context)
+                if res_user_id:
+                    res_users.write(cr, uid, res_user_id,
+                                    {'groups_id': [(4, wizard.manager_id.id)]})
         return {'type': 'ir.actions.act_window_close'}
 
 
