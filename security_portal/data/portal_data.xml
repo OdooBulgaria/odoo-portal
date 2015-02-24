@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- The portal manager group add flag is_portal -->
         <record id="base.group_portal_manager" model="res.groups">
             <field name="is_portalmanager" eval="True"/>
         </record>
+        <!--###############################################################
+                             Security Menu Rules
+        #################################################################-->
+
+        <!-- Portal\Facturacion -->
+        <record id="portal.portal_orders" model="ir.ui.menu">
+            <field name="name">Projects</field>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_portal_manager')])]"/>
+        </record>
+
+        <!-- Portal\Sevicio PostVenta -->
+        <record id="portal_after_sales" model="ir.ui.menu">
+            <field name="name">After Sale Services</field>
+            <field name="groups_id"
+                   eval="[(6,0,[ref('base.group_portal_manager')])]"/>
+        </record>
+
+        <!-- Portal\Proyectos -->
+        <record id="portal.portal_projects" model="ir.ui.menu">
+            <field name="name">Projects</field>
+            <field name="groups_id"
+                   eval="[(6,0,[ref('base.group_portal')])]"/>
+        </record>
+        <!-- Portal\Proyectos\Proyectos -->
+        <record id="portal_project.portal_services_projects" model="ir.ui.menu">
+            <field name="name">Projects</field>
+            <field name="groups_id"
+                   eval="[(6,0,[ref('base.group_portal_manager')])]"/>
+        </record>
+
+        <!--###############################################################
+                             Security Object Rules
+        #################################################################-->
     </data>
 </openerp>

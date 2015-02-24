@@ -66,22 +66,21 @@ class Wizard(models.TransientModel):
                     user_changes.append(user_id)
         return {'value': {'user_ids': user_changes}}
 
-    def action_apply(self, cr, uid, ids, context=None):
-        wizard = self.browse(cr, uid, ids[0], context)
-        portal_user_ids = [user.id for user in wizard.user_ids]
-        self.pool.get('portal.wizard.user').action_apply(cr, uid,
-                                                         portal_user_ids,
-                                                         context)
+    def action_apply(self):
+        portal_user_ids = [user.id for user in self.wizard.user_ids]
+        self.env['portal.wizard.user'].action_apply(portal_user_ids)
         # Aqui el codigo no estandar agregado para nosotros
-        res_users = self.pool.get('res.users')
-        for wizard_user in wizard.user_ids:
+        res_users = self.env['res.users']
+        for wizard_user in self.wizard.user_ids:
             if wizard_user.in_portalmanager:
                 domain = [('partner_id', '=', wizard_user.partner_id.id),
                           ('email', '=', wizard_user.email)]
-                res_user_id = res_users.search(cr, uid, domain, context=context)
+                res_user_id = res_users.search(domain)
                 if res_user_id:
-                    res_users.write(cr, uid, res_user_id,
-                                    {'groups_id': [(4, wizard.manager_id.id)]})
+                    res_users.write(res_user_id,
+                                    {'groups_id': [
+                                        (4, self.wizard.manager_id.id)
+                                    ]})
         return {'type': 'ir.actions.act_window_close'}
 
 
