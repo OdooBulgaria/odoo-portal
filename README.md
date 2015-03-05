@@ -3,8 +3,10 @@
 
 ## security_portal
 Este modulo hace los siguientes cambios:
-* Crea un grupo llamado portal manager que hereda los permisos del grupo portal.
-* Modifica los permisos de los menus disponibles en portal para que:
+1. Crea un grupo llamado portal manager que hereda los permisos del grupo portal.
+
+2. Modifica los permisos de los menus disponibles en portal para que:
+
     * Portal user:
         * Bandeja de entrada.
         * Incidencias.
