@@ -26,10 +26,11 @@ from openerp import SUPERUSER_ID
 class Wizard(models.TransientModel):
     _inherit = 'portal.wizard'
 
+    @api.model
     def _default_manager(self):
         manager_ids = self.env['res.groups'].search(
             [('is_portalmanager', '=', True)])
-        return manager_ids and manager_ids[0] or False
+        return manager_ids or manager_ids[0] or False
 
     manager_id = fields.Many2one(
         comodel_name='res.groups',
@@ -66,22 +67,18 @@ class Wizard(models.TransientModel):
                     user_changes.append(user_id)
         return {'value': {'user_ids': user_changes}}
 
+    @api.multi
     def action_apply(self):
-        portal_user_ids = [user.id for user in self.wizard.user_ids]
-        self.env['portal.wizard.user'].action_apply(portal_user_ids)
+        res = super(Wizard, self).action_apply()
         # Aqui el codigo no estandar agregado para nosotros
-        res_users = self.env['res.users']
-        for wizard_user in self.wizard.user_ids:
+        for wizard_user in self[0].user_ids:
             if wizard_user.in_portalmanager:
                 domain = [('partner_id', '=', wizard_user.partner_id.id),
                           ('email', '=', wizard_user.email)]
-                res_user_id = res_users.search(domain)
-                if res_user_id:
-                    res_users.write(res_user_id,
-                                    {'groups_id': [
-                                        (4, self.wizard.manager_id.id)
-                                    ]})
-        return {'type': 'ir.actions.act_window_close'}
+                res_user_ids = self.env['res.users'].search(domain)
+                for res_user_id in res_user_ids:
+                    res_user_id.groups_id = [(4, self.manager_id.id)]
+        return res
 
 
 class WizardManager(models.TransientModel):
