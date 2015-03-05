@@ -38,5 +38,14 @@
         <!--###############################################################
                              Security Object Rules
         #################################################################-->
+        <!--<record id="portal_issue.access_issues" model="ir.model.access">-->
+            <!--<field name="name">portal_issue.project_issue</field>-->
+            <!--<field name="model_id" ref="project.issue"/>-->
+            <!--<field name="group_id" ref="base.group_portal"/>-->
+            <!--<field name="perm_read" eval="1"/>-->
+            <!--<field name="perm_create" eval="1"/>-->
+            <!--<field name="perm_write" eval="1"/>-->
+            <!--<field name="perm_unlink" eval="0"/>-->
+        <!--</record>-->
     </data>
 </openerp>

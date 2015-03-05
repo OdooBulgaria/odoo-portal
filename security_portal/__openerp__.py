@@ -36,6 +36,7 @@
     ],
     'data': [
         'security/portal_security.xml',
+        'security/ir.model.access.csv',
         'views/portal_view.xml',
         'wizard/portal_wizard_view.xml',
         'data/portal_data.xml',
